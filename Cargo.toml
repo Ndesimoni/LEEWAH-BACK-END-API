@@ -1,0 +1,54 @@
+[package]
+name = "leewah-api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Server
+axum = { version = "0.8", features = ["ws", "multipart"] }
+tokio = { version = "1", features = ["full"] }
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+
+# Database
+sqlx = { version = "0.8", features = ["postgres", "uuid", "time", "runtime-tokio"] }
+
+# Cache
+redis = { version = "0.27", features = ["aio", "tokio-comp"] }
+
+# Auth
+jsonwebtoken = "9"
+sha2 = "0.10"
+bcrypt = "0.15"
+
+# IDs
+uuid = { version = "1", features = ["v4"] }
+nanoid = "0.4"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# HTTP client (MoMo, FCM, Anthropic, Africa's Talking)
+reqwest = { version = "0.12", features = ["json", "stream"] }
+
+# Validation
+validator = { version = "0.19", features = ["derive"] }
+
+# File storage (Cloudflare R2 — S3 compatible)
+aws-sdk-s3 = "1"
+aws-config = "1"
+
+# Background jobs
+tokio-cron-scheduler = "0.13"
+
+# Error handling
+anyhow = "1"
+thiserror = "2"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json"] }
+
+# Config
+dotenvy = "0.15"
