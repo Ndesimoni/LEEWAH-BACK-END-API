@@ -5,6 +5,81 @@ Follow every rule here without being asked.
 
 ---
 
+## What is Leewah?
+
+Leewah is a Cameroonian fintech mobile app built with React Native. It helps parents save and pay school fees in installments instead of one lump sum — solving a major financial pain point for families in Cameroon.
+
+**Core features:**
+- Phone-based OTP authentication (no passwords)
+- School fee payment plans (daily / weekly / monthly installments)
+- Wallet system (top up via MTN MoMo or Orange Money, pay from wallet)
+- School directory with fee structures
+- Donation campaigns for students and schools
+- Past exam questions (O-Level, A-Level, BEPC, etc.)
+- Peer review system for exam practice
+- Push notifications (Firebase FCM)
+- AI assistant (proxied Anthropic API, SSE streaming)
+- Live chat support (WebSocket)
+- Admin panel API
+
+**Target market:** Parents and students in Cameroon (Anglophone and Francophone)
+
+**Payment providers:** MTN Mobile Money + Orange Money (local Cameroon providers)
+
+**Currency:** FCFA (Central African Franc) — always integers, never decimals
+
+---
+
+## Collaboration Context
+
+- The developer is **learning Rust and Axum for the first time** through this project
+- This is a **paired programming** setup — explain the why behind every decision, not just the what
+- Always ask the developer a question when introducing a new concept to make them think first
+- After completing each major step, update `learning-notes/` with a detailed explanation of what was built and why
+- Keep explanations grounded in the Leewah project — avoid generic examples when a project-specific one works better
+
+---
+
+## Current Progress (update this as sprints complete)
+
+- [x] Dependencies added to Cargo.toml
+- [x] README.md with full architecture, schema, and sprint plan
+- [x] CLAUDE.md (this file) with rules and project context
+- [x] Custom skills: `/new-route`, `/new-model`, `/new-migration`, `/check`, `/review`
+- [x] .gitignore
+- [x] rust-toolchain.toml
+- [x] .env.example
+- [x] docker-compose.yml
+- [ ] Cargo.toml lints section
+- [ ] .github/workflows/ci.yml
+- [ ] src/main.rs (async Axum server boot)
+- [ ] src/config.rs
+- [ ] src/error.rs
+- [ ] src/db.rs
+- [ ] src/middleware/ (auth, rate_limit)
+- [ ] src/routes/ (all route modules)
+- [ ] src/models/ (all model structs)
+- [ ] src/services/ (all service modules)
+- [ ] src/types.rs
+- [ ] migrations/ (all SQL migration files)
+
+---
+
+## Key Decisions Made
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Language | Rust | Memory safe, fast binary, cheap to host |
+| Framework | Axum 0.8 | Modern, async-native, built on Tokio |
+| DB driver | sqlx (no ORM) | Compile-time checked SQL, no ORM bloat |
+| Auth | OTP via SMS, not passwords | Phone-first UX for Cameroonian market |
+| File storage | Cloudflare R2 | S3-compatible, cheaper than AWS S3 |
+| IDs | UUID v4 | Standard, no sequential ID enumeration attacks |
+| Amounts | Integer FCFA only | No float rounding errors on money |
+| Soft deletes | `deleted_at` timestamp | Payment history must stay intact |
+
+---
+
 ## Project Overview
 
 - **Language**: Rust (edition 2024)
