@@ -1,5 +1,6 @@
 use std::env::var;
 
+#[allow(dead_code)]
 pub struct Config {
     pub port: u16,
     pub database_url: String,
