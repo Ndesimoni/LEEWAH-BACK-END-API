@@ -2,6 +2,7 @@ use axum::{Router, routing::get};
 use tokio::net::TcpListener;
 
 mod config;
+mod error;
 
 #[tokio::main]
 async fn main() {
