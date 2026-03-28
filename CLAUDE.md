@@ -50,10 +50,10 @@ Leewah is a Cameroonian fintech mobile app built with React Native. It helps par
 - [x] rust-toolchain.toml
 - [x] .env.example
 - [x] docker-compose.yml
-- [ ] Cargo.toml lints section
-- [ ] .github/workflows/ci.yml
-- [ ] src/main.rs (async Axum server boot)
-- [ ] src/config.rs
+- [x] Cargo.toml lints section
+- [x] .github/workflows/ci.yml
+- [x] src/main.rs (async Axum server boot)
+- [x] src/config.rs
 - [ ] src/error.rs
 - [ ] src/db.rs
 - [ ] src/middleware/ (auth, rate_limit)

@@ -1,23 +1,24 @@
 version: "3.8"
+
 services:
   postgres:
     image: postgres:16
     ports:
       - "5432:5432"
     environment:
-       POSTGRES_USER: postgres
-       POSTGRES_PASSWORD: password
-       POSTGRES_DB: leewah
+      POSTGRES_USER: leewah
+      POSTGRES_PASSWORD: leewah
+      POSTGRES_DB: leewah
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
-  
+      - postgres_data:/var/lib/postgresql/data
+
   redis:
     image: redis:7-alpine
-    ports: 
+    ports:
       - "6379:6379"
     volumes:
-      - ./redis-data:/data
+      - redis_data:/data
 
 volumes:
-     postgres-data:
-     redis-data:
+  postgres_data:
+  redis_data:

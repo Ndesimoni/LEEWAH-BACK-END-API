@@ -52,3 +52,12 @@ tracing-subscriber = { version = "0.3", features = ["json"] }
 
 # Config
 dotenvy = "0.15"
+
+
+[lints.rust]
+unused = "warn"          # warn about unused code
+dead_code = "warn"       # warn about code that can never be reached
+
+[lints.clippy]
+all = "warn"             # enable all clippy warnings
+pedantic = "warn"        # enable stricter pedantic warnings
