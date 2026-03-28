@@ -1,3 +1,11 @@
+// Axum and serde imports needed to convert errors into HTTP JSON responses
+
+use axum::{Json, http::StatusCode, response::IntoResponse, response::Response};
+
+use serde_json::json;
+
+// All possible errors in the Leewah API — every handler returns this type
+
 pub enum AppError {
     Unauthorized,
     Forbidden,
@@ -8,9 +16,7 @@ pub enum AppError {
     Internal(anyhow::Error),
 }
 
-use axum::{Json, http::StatusCode, response::IntoResponse, response::Response};
-
-use serde_json::json;
+// Maps each error variant to the correct HTTP status code and JSON body
 
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
@@ -39,6 +45,7 @@ impl IntoResponse for AppError {
     }
 }
 
+// Helper to wrap any external error (sqlx, redis, etc.) into AppError::Internal
 impl AppError {
     pub fn internal(e: impl std::error::Error) -> Self {
         AppError::Internal(anyhow::anyhow!(e.to_string()))
