@@ -10,3 +10,4 @@ Study these files in order. Each one covers one concept in full detail.
 | [04-docker.md](04-docker.md) | What Docker is and how Docker Compose works |
 | [05-postgresql-vs-redis.md](05-postgresql-vs-redis.md) | Databases — PostgreSQL vs Redis and when to use each |
 | [06-config-rs.md](06-config-rs.md) | Loading environment variables into a typed Config struct |
+| [06-error-rs.md](06-error-rs.md) | Unified error handling with AppError, IntoResponse, and HTTP status codes |
