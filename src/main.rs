@@ -5,6 +5,7 @@ mod config;
 mod db;
 mod error;
 mod state;
+mod types;
 
 #[tokio::main]
 async fn main() {

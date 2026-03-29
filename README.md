@@ -112,7 +112,7 @@ CREATE TABLE users (
   phone            TEXT UNIQUE NOT NULL,
   name             TEXT,
   email            TEXT UNIQUE,
-  account_type     TEXT NOT NULL CHECK (account_type IN ('parent', 'student')),
+  account_type     TEXT NOT NULL CHECK (account_type IN ('guardian_or_parent', 'student')),
   profile_pic      TEXT,                         -- Cloudflare R2 URL
   language         TEXT DEFAULT 'english',
   is_admin         BOOLEAN DEFAULT FALSE,
@@ -421,7 +421,7 @@ DELETE /children/:id        Soft delete
 ```
 
 **Key rules**
-- All routes guarded: `account_type == 'parent'` → 403 if student hits these
+- All routes guarded: `account_type == 'guardian_or_parent'` → 403 if student hits these
 - Soft delete only: payment history must stay intact. Set `deleted_at = now()`, filter with `WHERE deleted_at IS NULL`
 - School linking: if school is in our DB → link by `school_id`; if not → store free-text `school_name`
 - Students cannot add siblings — enforced at the API level, not just the UI
