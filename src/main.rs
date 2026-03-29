@@ -4,6 +4,7 @@ use tokio::net::TcpListener;
 mod config;
 mod db;
 mod error;
+mod state;
 
 #[tokio::main]
 async fn main() {
@@ -12,13 +13,22 @@ async fn main() {
 
     //*load config from env variables into a typed struct
     let config = config::Config::from_env().expect("Failed to load config files");
-    let _pool = db::create_pool(&config.database_url).await;
+    let pool = db::create_pool(&config.database_url).await;
+
+    let port = config.port;
+
+    let state = state::AppState {
+        config,
+        db_pool: pool,
+    };
 
     //*build the app with routes and shared state (config, db pool, etc.)
-    let app = Router::new().route("/health", get(handler));
+    let app = Router::new()
+        .route("/health", get(handler))
+        .with_state(state);
 
     //*bind to the port and serve the app
-    let listener = TcpListener::bind(format!("0.0.0.0:{}", config.port))
+    let listener = TcpListener::bind(format!("0.0.0.0:{}", port))
         .await
         .unwrap();
 
