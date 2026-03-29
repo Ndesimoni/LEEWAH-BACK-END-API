@@ -6,6 +6,7 @@ use serde_json::json;
 
 // All possible errors in the Leewah API — every handler returns this type
 
+#[allow(dead_code)]
 pub enum AppError {
     Unauthorized,
     Forbidden,
@@ -18,15 +19,14 @@ pub enum AppError {
 
 // Maps each error variant to the correct HTTP status code and JSON body
 
+#[allow(dead_code)]
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         let (status, message) = match self {
             AppError::Unauthorized => (StatusCode::UNAUTHORIZED, "Unauthorized".to_string()),
             AppError::Forbidden => (StatusCode::FORBIDDEN, "Forbidden".to_string()),
-            AppError::NotFound(message) => (StatusCode::NOT_FOUND, message.to_string()),
-            AppError::ValidationError(message) => {
-                (StatusCode::UNPROCESSABLE_ENTITY, message.to_string())
-            }
+            AppError::NotFound(message) => (StatusCode::NOT_FOUND, message),
+            AppError::ValidationError(message) => (StatusCode::UNPROCESSABLE_ENTITY, message),
             AppError::InsufficientBalance => (
                 StatusCode::UNPROCESSABLE_ENTITY,
                 "Insufficient balance".to_string(),
@@ -46,6 +46,7 @@ impl IntoResponse for AppError {
 }
 
 // Helper to wrap any external error (sqlx, redis, etc.) into AppError::Internal
+#[allow(dead_code)]
 impl AppError {
     pub fn internal(e: impl std::error::Error) -> Self {
         AppError::Internal(anyhow::anyhow!(e.to_string()))

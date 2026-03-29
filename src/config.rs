@@ -29,11 +29,13 @@ impl Config {
             //redis url
             redis_url: var("REDIS_URL").map_err(|_| "REDIS_URL is required".to_string())?,
 
+            //jwt expiry times
             jwt_access_expiry_minutes: var("JWT_ACCESS_EXPIRY_MINUTES")
                 .map_err(|_| "JWT_ACCESS_EXPIRY_MINUTES is required".to_string())?
                 .parse()
                 .map_err(|_| "JWT_ACCESS must be a number".to_string())?,
 
+            //jwt refresh token expiry time
             jwt_refresh_expiry_days: var("JWT_REFRESH_EXPIRY_DAYS")
                 .map_err(|_| "JWT_REFRESH_EXPIRY_DAYS is required".to_string())?
                 .parse()

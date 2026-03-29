@@ -54,7 +54,7 @@ Leewah is a Cameroonian fintech mobile app built with React Native. It helps par
 - [x] .github/workflows/ci.yml
 - [x] src/main.rs (async Axum server boot)
 - [x] src/config.rs
-- [ ] src/error.rs
+- [x] src/error.rs
 - [ ] src/db.rs
 - [ ] src/middleware/ (auth, rate_limit)
 - [ ] src/routes/ (all route modules)

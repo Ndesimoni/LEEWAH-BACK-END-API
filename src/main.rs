@@ -2,6 +2,8 @@ use axum::{Router, routing::get};
 use tokio::net::TcpListener;
 
 mod config;
+mod db;
+mod error;
 
 #[tokio::main]
 async fn main() {
@@ -10,6 +12,7 @@ async fn main() {
 
     //*load config from env variables into a typed struct
     let config = config::Config::from_env().expect("Failed to load config files");
+    let _pool = db::create_pool(&config.database_url).await;
 
     //*build the app with routes and shared state (config, db pool, etc.)
     let app = Router::new().route("/health", get(handler));
