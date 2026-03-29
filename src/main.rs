@@ -28,9 +28,7 @@ async fn main() {
         .with_state(state);
 
     //*bind to the port and serve the app
-    let listener = TcpListener::bind(format!("0.0.0.0:{}", port))
-        .await
-        .unwrap();
+    let listener = TcpListener::bind(format!("0.0.0.0:{port}")).await.unwrap();
 
     println!("Listening on port {}", listener.local_addr().unwrap());
 
